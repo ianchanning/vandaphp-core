@@ -1,0 +1,19 @@
+{
+    "name": "ianchanning/vandaphp-core",
+    "description": "Vanda PHP core",
+    "license": "MIT",
+    "homepage": "https://github.com/ianchanning/vandaphp-core",
+    "support": {
+        "issues": "https://github.com/ianchanning/vandaphp-core/issues",
+        "source": "https://github.com/ianchanning/vandaphp-core"
+    },
+    "authors": [
+        {
+            "name": "Ian Channing",
+            "email": "ian@ianchanning.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    }
+}
