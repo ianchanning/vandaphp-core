@@ -16,16 +16,16 @@
  * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
 
-namespace IanChanning\VandaPHP;
+namespace Vanda;
 
 /**
- * N.B. This causes a fatal View class not found error if
- * use View
+ * N.B. This causes a fatal View class not found error if just
+ * `use View`
  * but as I understand it the namespace above should mean that use should be relative
  * however I think that use doesn't use the namespace
  * class Controller extends X would use the namespace 
  */
-use IanChanning\VandaPHP\View;
+use Vanda\View;
 
 class Controller
 {
