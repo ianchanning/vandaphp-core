@@ -16,7 +16,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
 
-namespace IanChanning\VandaPHP;
+namespace Vanda;
 
 class Model
 {
