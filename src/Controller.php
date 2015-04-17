@@ -1,18 +1,16 @@
 <?php
 
 /**
- * Vanda PHP (https://github.com/ianchanning/vandaphp/)
- * Copyright 2011-2014, Ian Channing
+ * Vanda PHP (https://github.com/ianchanning/vandaphp-core/)
+ * Copyright 2011-2015, Ian Channing
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @filesource
- * @copyright     Copyright 2011-2014, Ian Channing (http://ianchanning.com)
- * @link          https://github.com/ianchanning/vandaphp/ Vanda PHP
- * @package       vanda
- * @since         VandaPHP v 0.1.1
- * @modifiedby    $LastChangedBy: ianchanning $
+ * @copyright     Copyright 2011-2015, Ian Channing (http://ianchanning.com)
+ * @link          https://github.com/ianchanning/vandaphp-core/ Vanda PHP Core
+ * @package       Vanda
+ * @since         VandaPHP Core v 0.1.0
  * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
 
@@ -26,6 +24,7 @@ namespace Vanda;
  * class Controller extends X would use the namespace 
  */
 use Vanda\View;
+use Vanda\Router;
 
 class Controller
 {
@@ -96,4 +95,20 @@ class Controller
         $this->view->title = ucfirst($view) . ' : ' . ucfirst($action);
         $this->view->render($contentForLayout, $this->layout);
     }
+
+    /**
+     * Redirect to a new page, wrapper onto the PHP header function
+     * 
+     * @param string $view View to redirect to
+     * @param string $action Action to redirect to
+     * @return none Uses HTTP header 301 redirect
+     * 
+     * @access public
+     */
+    public function redirect($view, $action = null)
+    {
+        $url = Router::url($view, $action);
+        exit(header("Location: $url"));
+    }
+
 }
