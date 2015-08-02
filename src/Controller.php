@@ -21,7 +21,7 @@ namespace Vanda;
  * `use View`
  * but as I understand it the namespace above should mean that use should be relative
  * however I think that use doesn't use the namespace
- * class Controller extends X would use the namespace 
+ * class Controller extends X would use the namespace
  */
 use Vanda\View;
 use Vanda\Router;
@@ -56,7 +56,7 @@ class Controller
     }
 
     /**
-     * add variables to the array that is accessed by the view 
+     * add variables to the array that is accessed by the view
      *
      * @param $vars array var_name => var
      * @access public
@@ -82,27 +82,33 @@ class Controller
 
     /**
      * extract the view variables and apply them to the view
-     * 
+     *
      * @access public
      */
     public function renderView($view, $action)
     {
         extract($this->viewVars);
 
-        ob_start();
-        require_once 'Views' . DIRECTORY_SEPARATOR . $view . DIRECTORY_SEPARATOR . $action . '.php';
-        $contentForLayout = ob_get_clean();
-        $this->view->title = ucfirst($view) . ' : ' . ucfirst($action);
-        $this->view->render($contentForLayout, $this->layout);
+        $file = 'Views' . DIRECTORY_SEPARATOR . $view . DIRECTORY_SEPARATOR . $action . '.php';
+        // @todo Need a 'APP_PATH' constant for checking if the view exists to remove the PHP warning
+        // if (file_exists($file)) {
+            ob_start();
+            include_once $file;
+            $contentForLayout = ob_get_clean();
+            if (empty($this->view->title)) {
+                $this->view->title = ucfirst($view) . ' : ' . ucfirst($action);
+            }
+            $this->view->render($contentForLayout, $this->layout);
+        // }
     }
 
     /**
      * Redirect to a new page, wrapper onto the PHP header function
-     * 
+     *
      * @param string $view View to redirect to
      * @param string $action Action to redirect to
      * @return none Uses HTTP header 301 redirect
-     * 
+     *
      * @access public
      */
     public function redirect($view, $action = null)
