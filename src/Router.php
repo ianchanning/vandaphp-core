@@ -32,7 +32,7 @@ class Router
 
     /**
      * Convert a Model name to a view url
-     * 
+     *
      * @link http://www.php.net/manual/en/function.ucwords.php#92092
      * Used in controller->load_model
      *
@@ -51,7 +51,7 @@ class Router
      *
      * @access public
      */
-    public function dispatch() 
+    public function dispatch()
     {
         $v              = filter_input(INPUT_GET, 'v', FILTER_UNSAFE_RAW);
         $a              = filter_input(INPUT_GET, 'a', FILTER_UNSAFE_RAW);
@@ -62,14 +62,14 @@ class Router
 
         $controllerObj  = new $controller($model);
         $controllerObj->{$action}();
-        $controllerObj->renderView($view, $action);        
+        $controllerObj->renderView($view, $action);
     }
 
     /**
      * Get a formatted URL to a view/action
      *
-     * @param string $view View 
-     * @param string $action Action 
+     * @param string $view View
+     * @param string $action Action
      * @return string $url Absolute URL http://domain.com/?v=pages&a=index
      * @access public
      */
@@ -81,10 +81,19 @@ class Router
             $protocol = 'https';
         }
         /**
+         * Handle when dirname('/index.php') ==> '\' on Windows
+         * @var string
+         * @todo We basically shouldn't be using dirname for a URL
+         */
+        $path = dirname($_SERVER['PHP_SELF']);
+        if ($path === DIRECTORY_SEPARATOR) {
+            $path = '/';
+        }
+        /**
          * @var the root URL of the website
          * @link http://stackoverflow.com/a/3429657/327074 Get base directory of current script
          */
-        $baseUrl = $protocol . '://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['PHP_SELF']);
+        $baseUrl = $protocol . '://' . $_SERVER['SERVER_NAME'] . $path;
 
         $url = $baseUrl . "?v=$view";
         if (!is_null($action)) {
