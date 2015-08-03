@@ -19,7 +19,7 @@ namespace Vanda;
 class Model
 {
     /**
-     * @var string Model name  
+     * @var string Model name
      */
     public $name;
 
@@ -29,10 +29,21 @@ class Model
     }
 
     /**
+     * Link two models together
+     * @param  string $className Class name of model
+     * @since v0.4.0
+     */
+    protected function linkModel($className)
+    {
+        $namespaceClassName = '\\Models\\' . $className;
+        $this->{$className} = new $namespaceClassName($className);
+    }
+
+    /**
      * Get the model data
      */
     public function get()
     {
-        
+
     }
 }
