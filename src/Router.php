@@ -60,7 +60,7 @@ class Router
         $model          = $this->viewToModel($view);
         $controller     = '\\Controllers\\' . $model . 'Controller';
 
-        $controllerObj  = new $controller($model);
+        $controllerObj  = new $controller($model, $action);
         $controllerObj->{$action}();
         $controllerObj->renderView($view, $action);
     }
@@ -70,7 +70,7 @@ class Router
      *
      * @param string $view View
      * @param string $action Action
-     * @return string $url Absolute URL http://domain.com/?v=pages&a=index
+     * @return string $url Absolute URL http://example.com/?v=pages&a=index
      * @access public
      */
     public static function url($view, $action = null)
