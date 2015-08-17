@@ -29,6 +29,7 @@ use Vanda\Router;
 class Controller
 {
     public $modelName = '';
+    public $action = '';
     public $viewVars = array();
     public $layout = '';
 
@@ -47,12 +48,13 @@ class Controller
      */
     public $view = null;
 
-    public function __construct($modelName = null)
+    public function __construct($modelName = null, $action = null)
     {
-        $this->modelName = $modelName;
+        $this->action       = $action;
+        $this->layout       = 'default';
+        $this->view         = new View();
+        $this->modelName    = $modelName;
         $this->loadModel($modelName);
-        $this->layout = 'default';
-        $this->view = new View();
     }
 
     /**
