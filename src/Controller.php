@@ -93,7 +93,7 @@ class Controller
 
         $file = 'Views' . DIRECTORY_SEPARATOR . $view . DIRECTORY_SEPARATOR . $action . '.php';
         // @todo Need a 'APP_PATH' constant for checking if the view exists to remove the PHP warning
-        // if (file_exists($file)) {
+        if (!empty($this->layout) /*&& file_exists($file)*/) {
             ob_start();
             include_once $file;
             $contentForLayout = ob_get_clean();
@@ -101,7 +101,7 @@ class Controller
                 $this->view->title = ucfirst($view) . ' : ' . ucfirst($action);
             }
             $this->view->render($contentForLayout, $this->layout);
-        // }
+        }
     }
 
     /**
